@@ -1,0 +1,28 @@
+@import "../variables.scss";
+
+.main {
+	min-height: 100vh;
+	min-width: 100vw;
+	background-image: url(../../assets/images/star_wars_background.jpeg);
+	background-size: cover;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	overflow-y: hidden;
+}
+
+.title {
+	margin: 0;
+	// margin-bottom: 130px;
+	line-height: 0.8;
+	letter-spacing: 8px;
+	font-size: 10vh;
+	font-family: StarWarsFont;
+	text-align: center;
+	mix-blend-mode: hard-light;
+	color: $color-gray;
+	width: min-content;
+	text-shadow: -2px 0 $color-star-wars, 0 2px $color-star-wars, 2px 0$color-star-wars, 0 -2px $color-star-wars;
+	z-index: 2;
+}
