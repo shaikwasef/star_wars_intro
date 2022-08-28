@@ -1,32 +1,39 @@
 import { useEffect, useRef } from 'react';
-import { canvasOptions } from '../../interfaces/canvas-interfaces';
-
+import { canvasContext } from '../constants';
+import { resizeCanvas } from '../helpers';
 interface PropsInterface {
-	draw: (context: RenderingContext | null | undefined, frameCount: number) => void;
-	options : canvasOptions;
+	draw: (context: RenderingContext | null | undefined, frameCount: number, fontLoaded: boolean) => void;
 }
 
 export default function useCanvas(props: PropsInterface) {
-	const { draw , options } = props;
+	const { draw } = props;
 	const canvasRef = useRef<HTMLCanvasElement>(null);
 
 	useEffect(
 		() => {
 			const canvas = canvasRef.current;
-			const context =  canvas?.getContext(options.context);
+			const context = canvas?.getContext(canvasContext);
+			if (context?.canvas) {
+				resizeCanvas(context?.canvas);
+			}
 			let animationId: number;
 			let frameCount = 0;
-			const render = () => {
+
+			const render = (fontLoaded: boolean) => {
 				frameCount++;
-				draw(context, frameCount);
-				animationId = window.requestAnimationFrame(render);
+				draw(context, frameCount, fontLoaded);
+				// animationId = window.requestAnimationFrame(render);
 			};
-			render();
+
+			document.fonts.ready.then(() => {
+				render(true);
+			})
+
 			return () => {
 				window.cancelAnimationFrame(animationId);
 			};
 		},
-		[ draw ]
+		[draw]
 	);
 
 	return canvasRef;

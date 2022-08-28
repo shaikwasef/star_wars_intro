@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@types/css-font-loading-module": "^0.0.7",
     "next": "12.2.5",
     "node-sass": "^7.0.1",
     "react": "18.2.0",

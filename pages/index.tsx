@@ -1,9 +1,7 @@
 import { NextPage } from 'next';
 import Head from 'next/head';
 import Canvas from '../components/canvas';
-import { canvasOptions } from '../helpers/constants';
-import { draw } from '../helpers/drawingFunctions';
-import styles from '../styles/modules/Home.module.scss';
+import { drawTitle } from '../helpers/drawingFunctions';
 
 const Home: NextPage = () => {
 	return (
@@ -14,7 +12,7 @@ const Home: NextPage = () => {
 				<link rel="icon" href="/darth_wader.png" />
 			</Head>
 
-			<Canvas draw={draw} options={canvasOptions} />
+			<Canvas draw={drawTitle} />
 
 			{/* <main className={styles.main}>
 				<h1 className={styles.title}>STAR WARS</h1>
