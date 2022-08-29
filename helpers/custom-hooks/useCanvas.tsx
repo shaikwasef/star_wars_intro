@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import { canvasContext } from '../constants';
 import { resizeCanvas } from '../helpers';
 interface PropsInterface {
-	draw: (context: RenderingContext | null | undefined, frameCount: number, fontLoaded: boolean) => void;
+	draw: (context: RenderingContext | null | undefined, frameCount: number) => void;
 }
 
 export default function useCanvas(props: PropsInterface) {
@@ -19,14 +19,14 @@ export default function useCanvas(props: PropsInterface) {
 			let animationId: number;
 			let frameCount = 0;
 
-			const render = (fontLoaded: boolean) => {
+			const render = () => {
 				frameCount++;
-				draw(context, frameCount, fontLoaded);
-				// animationId = window.requestAnimationFrame(render);
+				draw(context, frameCount);
+				animationId = window.requestAnimationFrame(render);
 			};
 
 			document.fonts.ready.then(() => {
-				render(true);
+				render();
 			})
 
 			return () => {
